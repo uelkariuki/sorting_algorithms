@@ -18,8 +18,11 @@ void swap(int *num1, int *num2)
 void bubble_sort(int *array, size_t size)
 {
 	size_t i, j;
-	int swapped;
+	int swapped, n;
 
+	n = size;
+	if (n < 2)
+		return;
 	for (i = 0; i < size - 1; i++)
 	{
 		swapped = 0;
