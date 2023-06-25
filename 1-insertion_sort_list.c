@@ -1,23 +1,5 @@
 #include "sort.h"
 /**
- * calc_size - calculates size of linked list
- * @list: the list
- *
- * Return: size of the list
- */
-int calc_size(listint_t *list)
-{
-	listint_t *temp = list;
-	int size = 0;
-
-	while (temp)
-	{
-		size++;
-		temp = temp->next;
-	}
-	return (size);
-}
-/**
  * sort - Sort a node on the right place
  * @list: List to be sorted
  * @current: Node to be inserted
@@ -51,10 +33,11 @@ void sort(listint_t **list, listint_t *current)
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *current = *list, *next_node;
+	listint_t *current, *next_node;
 
-	if (calc_size(*list) < 2)
+	if (!list || !(*list))
 		return;
+	current = *list;
 	while (current)
 	{
 		next_node = current->next;
