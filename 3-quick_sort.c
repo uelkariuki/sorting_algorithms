@@ -9,7 +9,7 @@
  * Return: the correct index of the pivot
  */
 
-int partition(int *array, int low , int high)
+int partition(int *array, int low, int high)
 {
 	int pivot, i, j;
 
@@ -21,8 +21,7 @@ int partition(int *array, int low , int high)
 		if (array[j] < pivot)
 		{
 			i++;
-			swap(&array[j], &array[i]);
-
+			swap(&array[i], &array[j]);
 		}
 
 	}
@@ -44,8 +43,7 @@ void quick(int *array, int low, int high)
 	if (low < high)
 	{
 		pivot_idx = partition(array, low, high);
-		/*print_array(arraiy, high + 1);*/
-
+		print_array(array, 10);
 		quick(array, low, pivot_idx - 1);
 		quick(array, pivot_idx + 1, high);
 
