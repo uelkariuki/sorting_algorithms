@@ -74,5 +74,5 @@ void quick_sort(int *array, size_t size)
 	if (n < 2)
 		return;
 
-	quick(array, 0, n , size);
+	quick(array, 0, size - 1, size);
 }
