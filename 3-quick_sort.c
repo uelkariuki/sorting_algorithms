@@ -2,14 +2,15 @@
 #include "swap.c"
 
 /**
- * partition- function to find the correct index of the pivot
- * @array: the array to be sorted
- * @low: the firs index
- * @high: the last index
- * Return: the correct index of the pivot
+ * partition- function to partition an array using the Lomuto partition scheme
+ * @array: the array to be partitioned
+ * @low: the firs index of the partition
+ * @high: the last index of the partition
+ * @size: the size of the array
+ * Return: the correct (final) index of the pivot
  */
 
-int partition(int *array, int low, int high)
+int partition(int *array, int low, int high, size_t size)
 {
 	int pivot, i, j;
 
@@ -22,10 +23,14 @@ int partition(int *array, int low, int high)
 		{
 			i++;
 			swap(&array[i], &array[j]);
+			if (i != j)
+				print_array(array, size);
 		}
 
 	}
 	swap(&array[i + 1], &array[high]);
+	if ((i + 1) != high)
+		print_array(array, size);
 	return (i + 1);
 }
 
@@ -34,18 +39,18 @@ int partition(int *array, int low, int high)
  * @array: array to be sorted
  * @low: first index
  * @high: last index
+ * @size: the size of the array
  */
 
-void quick(int *array, int low, int high)
+void quick(int *array, int low, int high, size_t size)
 {
 	int pivot_idx;
 
 	if (low < high)
 	{
-		pivot_idx = partition(array, low, high);
-		print_array(array, 10);
-		quick(array, low, pivot_idx - 1);
-		quick(array, pivot_idx + 1, high);
+		pivot_idx = partition(array, low, high, size);
+		quick(array, low, pivot_idx - 1, size);
+		quick(array, pivot_idx + 1, high, size);
 
 	}
 }
@@ -61,10 +66,10 @@ void quick_sort(int *array, size_t size)
 {
 	int n;
 
-	n = size;
+	n = size - 1;
 
 	if (n < 2)
 		return;
 
-	quick(array, 0, size - 1);
+	quick(array, 0, n, size);
 }
