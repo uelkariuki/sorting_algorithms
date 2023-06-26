@@ -67,12 +67,12 @@ void quick_sort(int *array, size_t size)
 
 	int n;
 
-	n = size;
+	n = size - 1;
 
 	if (array == NULL)
 		return;
 	if (n < 2)
 		return;
 
-	quick(array, 0, size - 1, size);
+	quick(array, 0, n , size);
 }
