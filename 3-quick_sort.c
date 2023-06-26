@@ -15,23 +15,23 @@ int partition(int *array, int low, int high, size_t size)
 	int pivot, i, j;
 
 	pivot = array[high];
-	i = low - 1;
+	i = low;
 
 	for (j = low; j <= high - 1; j++)
 	{
-		if (array[j] < pivot)
+		if (array[j] <=  pivot)
 		{
-			i++;
 			swap(&array[i], &array[j]);
 			if (i != j)
 				print_array(array, size);
+			i++;
 		}
 
 	}
-	swap(&array[i + 1], &array[high]);
-	if ((i + 1) != high)
+	swap(&array[i], &array[high]);
+	if (i != high)
 		print_array(array, size);
-	return (i + 1);
+	return (i);
 }
 
 /**
@@ -68,10 +68,7 @@ void quick_sort(int *array, size_t size)
 	int n;
 
 	n = size;
-
-	if (array == NULL)
-		return;
-	if (n < 2)
+	if (!array || n < 2)
 		return;
 
 	quick(array, 0, size - 1, size);
