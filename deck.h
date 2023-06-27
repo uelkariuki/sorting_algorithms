@@ -3,10 +3,10 @@
 
 /**
  * enum kind_e- kind of card (* not confirmed)
- * @SPADE: spade
- * @HEART: heart
- * @CLUB:  club
- * @DIAMOND: diamond
+ * @SPADE: spade card
+ * @HEART: heart card
+ * @CLUB:  club card
+ * @DIAMOND: diamond card
  */
 typedef enum kind_e
 {
