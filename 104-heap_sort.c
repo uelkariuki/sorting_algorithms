@@ -5,39 +5,39 @@
  *heapify- a function to help in heapifying an array,(largest be at root)
  * @array: the array to be heapified
  * @size: the size of the array
- * @q: the node q
+ * @begin: the node at start
+ * @end: node at end
  *
  */
 
-void heapify(int *array, int size, int q)
+void heapify(int *array, size_t size, size_t begin, size_t end)
 {
-	int largest, left, right;
+	size_t largest, left_child, swap_idx;
 
-	largest = q; /* set q as largest elem for now*/
+	largest = begin; /* set begin as largest elem for now*/
 
 	/*In binary heap, each node has 2 children so to find*/
 	/* the left child index of the node at index q*/
-	left = 2 * q + 1;
-	/*and for the right child index*/
-	right = 2 * q + 2;
 
-	if (left < size && array[left] > array[largest])
+	while (2 * largest + 1 <= end)
 	{
-		largest = left;
-	}
-	if (right < size && array[right] > array[largest])
-	{
-		largest = right;
-	}
+		left_child = 2 * largest + 1;
+		swap_idx = largest;
+		if (array[swap_idx] < array[left_child])
+			swap_idx = left_child;
+
+		if (left_child + 1 <= end && array[swap_idx] < array[left_child + 1])
+			swap_idx = left_child + 1;
+
+		if (swap_idx == largest)
+			return;
+
 
 	/*If largest is not at root or root does not have the largest elem*/
-	if (largest != q)
-	{
-		swap(&array[q], &array[largest]);
+		swap(&array[largest], &array[swap_idx]);
 		print_array(array, size);
-		/*doing swap may have affected the max heap so */
-		/*recurively call heapify to restore heap*/
-		heapify(array, size, largest);
+
+		largest = swap_idx;
 	}
 
 }
@@ -53,19 +53,17 @@ void heap_sort(int *array, size_t size)
 {
 	int q;
 
-	/*if (n < 2)*/
-		/*return;*/
 	/*build the max heap for the non-leaf nodes*/
 	for (q = size / 2 - 1; q >= 0; q--)
 	{
-		heapify(array, size, q);
+		heapify(array, size, q, size - 1);
 	}
 	/*the heap sort*/
-	for (q = size - 1; q >= 0; q--)
+	for (q = size - 1; q > 0; q--)
 	{
 		swap(&array[0], &array[q]); /* the root is at index 0*/
-		print_array(array, q);
-		heapify(array, q, 0);
+		print_array(array, size);
+		heapify(array, size, 0, q - 1);
 		/*q in heapify refering to elements remaining in*/
 		/* the sub-array yet to be sorted*/
 	}
