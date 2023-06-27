@@ -16,8 +16,7 @@ void heapify(int *array, size_t size, size_t begin, size_t end)
 
 	largest = begin; /* set begin as largest elem for now*/
 
-	/*In binary heap, each node has 2 children so to find*/
-	/* the left child index of the node at index q*/
+	/*In binary heap, each node has 2 children*/
 
 	while (2 * largest + 1 <= end)
 	{
