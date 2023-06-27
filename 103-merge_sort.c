@@ -63,8 +63,7 @@ void merge_sorted(int *array, int l, int m, int r)
 	}
 
 	printf("[Done]: ");
-	print_array(array, length_left + length_right);
-
+	print_array(array + l, r - l + 1);
 	free_array(array_left);
 }
 /**
